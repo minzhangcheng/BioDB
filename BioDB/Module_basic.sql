@@ -70,7 +70,7 @@ CREATE TABLE db (
 CREATE TABLE dbxref (
     id          INTEGER     AUTO_INCREMENT,
     db_id       INTEGER,
-    ref         VARCHAR(55),
+    ref         VARCHAR(255),
     ref_type    VARCHAR(55),
     ref_desc    VARCHAR(255),
     
