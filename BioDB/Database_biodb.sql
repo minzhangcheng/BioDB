@@ -32,12 +32,13 @@ USE biodb
 ;
 
 CREATE TABLE module_installed (
-    module      VARCHAR(55),
-    version     VARCHAR(55),
+    module          VARCHAR(55),
+    version         VARCHAR(55),
+    release_date    VARCHAR(8),
     
-    PRIMARY KEY (module, version),
-    UNIQUE (module),
-    INDEX (version)
+    PRIMARY KEY (module),
+    INDEX (version),
+    INDEX (release_date)
 );
 
 CREATE TABLE module_depend (

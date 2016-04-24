@@ -25,6 +25,7 @@
 
 set @module_name = 'basic';
 set @module_version = '0.1';
+set @release_date = '20160423';
 
 CREATE TABLE species (
     id              INTEGER     AUTO_INCREMENT,
@@ -109,5 +110,5 @@ CREATE TABLE gene_dbxref (
 );
 
 INSERT INTO module_installed VALUES
-    (@module_name, @module_version)
+    (@module_name, @module_version, @release_date)
 ;

@@ -25,6 +25,7 @@
 
 set @module_name = 'array';
 set @module_version = '0.1';
+set @release_date = '20160423';
 
 CREATE TABLE array_array (
     id          INTEGER     AUTO_INCREMENT,
@@ -103,7 +104,7 @@ CREATE TABLE array_probe_go (
 );
 
 INSERT INTO module_installed VALUES
-    (@module_name, @module_version)
+    (@module_name, @module_version, @release_date)
 ;
 
 INSERT INTO module_depend VALUES
