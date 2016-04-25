@@ -25,6 +25,7 @@
 
 set @module_name = 'go';
 set @module_version = '0.1';
+set @release_date = '20160423';
 
 CREATE TABLE go_term (
     id          INTEGER     AUTO_INCREMENT,
@@ -152,7 +153,7 @@ CREATE TABLE go_term_qualifier (
 
 
 INSERT INTO module_installed VALUES
-    (@module_name, @module_version)
+    (@module_name, @module_version, @release_date)
 ;
 
 INSERT INTO module_depend VALUES
