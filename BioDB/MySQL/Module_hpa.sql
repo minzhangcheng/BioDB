@@ -29,7 +29,7 @@ set @release_date = '20160423';
 
 CREATE TABLE hpa_normal (
     id          INTEGER     AUTO_INCREMENT,
-    protein_id  VARCHAR(25),
+    hpa_id		INTEGER,
     dbxref_id	INTEGER,
     symbol      VARCHAR(15),
     tissue		VARCHAR(25),
@@ -40,7 +40,7 @@ CREATE TABLE hpa_normal (
     
     PRIMARY KEY (id),
     FOREIGN KEY (dbxref_id) REFERENCES dbxref(id),
-    UNIQUE (protein_id),
+    UNIQUE (hpa_id),
     INDEX (symbol),
     INDEX (tissue),
     INDEX (cell_type),
@@ -50,7 +50,7 @@ CREATE TABLE hpa_normal (
 
 CREATE TABLE hpa_cancer (
 	id			INTEGER		AUTO_INCREMENT,
-	protein_id	VARCHAR(25),
+	hpa_id		INTEGER,
     dbxref_id	INTEGER,
 	symbol		VARCHAR(15),
 	tumor		VARCHAR(55),
@@ -62,7 +62,7 @@ CREATE TABLE hpa_cancer (
 	
 	PRIMARY KEY (id),
 	FOREIGN KEY (dbxref_id) REFERENCES dbxref(id),
-	UNIQUE (protein_id),
+	INDEX (hpa_id),
 	INDEX (symbol),
     INDEX (tumor),
     INDEX (expr_level),
@@ -73,7 +73,7 @@ CREATE TABLE hpa_cancer (
 
 CREATE TABLE hpa_localization (
 	id			INTEGER		AUTO_INCREMENT,
-	protein_id	VARCHAR(25),
+	hpa_id		INTEGER,
     dbxref_id	INTEGER,
 	symbol		VARCHAR(15),
 	main_loc	VARCHAR(100),
@@ -85,7 +85,7 @@ CREATE TABLE hpa_localization (
 	
 	PRIMARY KEY (id),
 	FOREIGN KEY (dbxref_id) REFERENCES dbxref(id),
-	UNIQUE (protein_id),
+	INDEX (hpa_id),
 	INDEX (symbol),
 	INDEX (main_loc),
 	INDEX (other_loc),
