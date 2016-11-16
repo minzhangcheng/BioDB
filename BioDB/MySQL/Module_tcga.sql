@@ -276,7 +276,41 @@ CREATE TABLE tcga_family_history (
     INDEX (relative_with_cancer_history)
 );
 
-CREATE TABLE tcga_
+CREATE TABLE tcga_rna_expression_workflow (
+    id                              INTEGER     AUTO_INCREMENT,
+    rna_expression_workflow_id      VARCHAR(55),
+    project_id                      VARCHAR(55),
+    submitter_id                    VARCHAR(55),
+    workflow_link                   VARCHAR(255),
+    workflow_type                   VARCHAR(55),
+    workflow_end_datetime           VARCHAR(55),
+    workflow_start_datetime         VARCHAR(55),
+    workflow_version                VARCHAR(55),
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
+    UNIQUE (rna_expression_workflow_id),
+    UNIQUE (project_id, submitter_id),
+    INDEX (workflow_type),
+    INDEX (workflow_end_datetime),
+    INDEX (workflow_start_datetime)
+);
+
+CREATE TABLE tcga_file_gene_expression (
+    id                              INTEGER     AUTO_INCREMENT,
+    file_id                         VARCHAR(55),
+    project_id                      VARCHAR(55),
+    submitter_id                    VARCHAR(55),
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
+    FOREIGN KEY (case_id) REFERENCES tcga_case(case_id),
+    UNIQUE (file_id),
+    UNIQUE (project_id, submitter_id)
+);
+
+
+
 
 
 INSERT INTO module_installed VALUES
