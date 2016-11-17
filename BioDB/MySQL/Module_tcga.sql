@@ -276,11 +276,12 @@ CREATE TABLE tcga_family_history (
     INDEX (relative_with_cancer_history)
 );
 
-CREATE TABLE tcga_rna_expression_workflow (
+CREATE TABLE tcga_workflow (
     id                              INTEGER     AUTO_INCREMENT,
-    rna_expression_workflow_id      VARCHAR(55),
+    workflow_id      VARCHAR(55),
     project_id                      VARCHAR(55),
     submitter_id                    VARCHAR(55),
+    sample_id                       VARCHAR(55),
     workflow_link                   VARCHAR(255),
     workflow_type                   VARCHAR(55),
     workflow_end_datetime           VARCHAR(55),
@@ -289,27 +290,50 @@ CREATE TABLE tcga_rna_expression_workflow (
 
     PRIMARY KEY (id),
     FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
-    UNIQUE (rna_expression_workflow_id),
+    UNIQUE (workflow_id),
     UNIQUE (project_id, submitter_id),
     INDEX (workflow_type),
     INDEX (workflow_end_datetime),
     INDEX (workflow_start_datetime)
 );
 
-CREATE TABLE tcga_file_gene_expression (
+CREATE TABLE tcga_file_expression (
     id                              INTEGER     AUTO_INCREMENT,
     file_id                         VARCHAR(55),
     project_id                      VARCHAR(55),
     submitter_id                    VARCHAR(55),
+    workflow_id                     VARCHAR(55),
+    data_category                   VARCHAR(55),
+    data_format                     VARCHAR(55),
+    data_type                       VARCHAR(55),
+    experimental_strategy           VARCHAR(55),
+    file_name                       VARCHAR(55),
+    file_size                       INTEGER,
+    md5sum                          VARCHAR(55),
+    state_comment                   VARCHAR(55),
 
     PRIMARY KEY (id),
     FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
-    FOREIGN KEY (case_id) REFERENCES tcga_case(case_id),
+    FOREIGN KEY (workflow_id) REFERENCES tcga_workflow(workflow_id),
     UNIQUE (file_id),
-    UNIQUE (project_id, submitter_id)
+    UNIQUE (project_id, submitter_id),
+    UNIQUE (file_name),
+    INDEX (data_category),
+    INDEX (data_format),
+    INDEX (data_type),
+    INDEX (experimental_strategy),
+    INDEX (state_comment)
 );
 
+CREATE TABLE tcga_expression (
+    file_id                         VARCHAR(55),
+    gene_id                         VARCHAR(55),
+    value                           FLOAT,
 
+    PRIMARY KEY (file_id, gene_id),
+    INDEX (file_id),
+    INDEX (gene_id)
+);
 
 
 
