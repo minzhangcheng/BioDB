@@ -59,16 +59,16 @@ CREATE TABLE tcga_project(
     INDEX (primary_site)
 );
 
-CREATE TABLE tcga_tissue_source_sites(
+CREATE TABLE tcga_tissue_source_site(
     id                      INTEGER     AUTO_INCREMENT,
-    tissue_source_sites_id  VARCHAR(55),
+    tissue_source_site_id  VARCHAR(55),
     code                    VARCHAR(55),
     bcr_id                  VARCHAR(55),
     name                    VARCHAR(55),
     project                 VARCHAR(55),
 
     PRIMARY KEY (id),
-    UNIQUE (tissue_source_sites_id),
+    UNIQUE (tissue_source_site_id),
     UNIQUE (code),
     INDEX (bcr_id),
     INDEX (name),
@@ -80,11 +80,11 @@ CREATE TABLE tcga_case(
     case_id                 VARCHAR(55),
     project_id              VARCHAR(55),
     submitter_id            VARCHAR(55),
-    tissue_source_sites_id  VARCHAR(55),
+    tissue_source_site_id  VARCHAR(55),
 
     PRIMARY KEY (id),
     FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
-    FOREIGN KEY (tissue_source_sites_id) REFERENCES tcga_tissue_source_sites(tissue_source_sites_id),
+    FOREIGN KEY (tissue_source_site_id) REFERENCES tcga_tissue_source_site(tissue_source_site_id),
     UNIQUE (case_id),
     UNIQUE (project_id, submitter_id),
     INDEX (submitter_id)
