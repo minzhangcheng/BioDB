@@ -1,19 +1,48 @@
+# ############################################################################
+#
+# Copyright (C) 2016 Minzhang Cheng
+# Contact: minzhangcheng@gmail.com
+#
+# This file is part of the BioDB, a database for biological data analysis.
+#
+# GNU Lesser General Public License Usage
+# This file may be used under the terms of the GNU Lesser General Public
+# License version 3 as published by the Free Software Foundation and
+# appearing in the file LICENSE included in the packaging of this file.
+# Please review the following information to ensure the GNU Lesser
+# General Public License version 3 requirements will be met:
+# http://www.gnu.org/licenses/gpl-3.0.html
+#
+# ############################################################################
+
+
 from sqlobject import *
 
-# connection = connectionForURI('mysql://biodb_select:biodb_select@mysql.cmz.ac.cn/biodb')
-connection = connectionForURI('mysql://biodb_admin:biodb_admin123456@127.0.0.0.1/biodb')
-sqlhub.processConnection = connection
+
+def connect(**kwargs):
+    svr = {'host': 'biodb.cmz.ac.cn', 'port': 3306,
+           'username': 'biodb_select', 'password': 'biodb_select',
+           'database': 'biodb'
+           }
+    for i in svr:
+        if i in kwargs:
+            svr[i] = kwargs[i]
+        if 'passwd' in kwargs:
+            svr['password'] = kwargs['passwd']
+    uri = 'mysql://%s:%s@%s:%d/%s' % (svr['username'], svr['password'],
+                                      svr['host'], svr['port'],
+                                      svr['database'])
+    connection = connectionForURI(uri)
+    sqlhub.processConnection = connection
 
 
 class tcga_program(SQLObject):
-    id = IntCol()
     program_id = StringCol(length=55)
     name = StringCol(length=55)
     dbgap_accession_number = StringCol(length=55)
 
 
 class tcga_project(SQLObject):
-    id = IntCol()
     project_id = StringCol(length=55)
     program_id = StringCol(length=55)
     name = StringCol(length=255)
@@ -23,7 +52,6 @@ class tcga_project(SQLObject):
 
 
 class tcga_tissue_source_site(SQLObject):
-    id = IntCol()
     tissue_source_site_id = StringCol(length=55)
     code = StringCol(length=55)
     bcr_id = StringCol(length=55)
@@ -32,7 +60,6 @@ class tcga_tissue_source_site(SQLObject):
 
 
 class tcga_case(SQLObject):
-    id = IntCol()
     case_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
@@ -40,7 +67,6 @@ class tcga_case(SQLObject):
 
 
 class tcga_sample(SQLObject):
-    id = IntCol()
     sample_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
@@ -69,7 +95,6 @@ class tcga_sample(SQLObject):
 
 
 class tcga_demographic(SQLObject):
-    id = IntCol()
     demographic_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
@@ -82,7 +107,6 @@ class tcga_demographic(SQLObject):
 
 
 class tcga_diagnosis(SQLObject):
-    id = IntCol()
     diagnosis_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
@@ -107,7 +131,6 @@ class tcga_diagnosis(SQLObject):
 
 
 class tcga_exposure(SQLObject):
-    id = IntCol()
     exposure_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
@@ -122,7 +145,6 @@ class tcga_exposure(SQLObject):
 
 
 class tcga_treatment(SQLObject):
-    id = IntCol()
     treatment_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
@@ -134,7 +156,6 @@ class tcga_treatment(SQLObject):
 
 
 class tcga_family_history(SQLObject):
-    id = IntCol()
     family_history_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
@@ -147,7 +168,6 @@ class tcga_family_history(SQLObject):
     
 
 class tcga_workflow(SQLObject):
-    id = IntCol()
     workflow_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
@@ -160,7 +180,6 @@ class tcga_workflow(SQLObject):
 
 
 class tcga_file_expression(SQLObject):
-    id = IntCol()
     file_id = StringCol(length=55)
     project_id = StringCol(length=55)
     submitter_id = StringCol(length=55)
