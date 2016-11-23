@@ -214,7 +214,7 @@ CREATE TABLE tcga_exposure (
     cigarettes_per_day          FLOAT,
     height                      FLOAT,
     weight                      FLOAT,
-    years_smoked                FLOAT,
+                    FLOAT,
 
     PRIMARY KEY (id),
     FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
@@ -276,45 +276,25 @@ CREATE TABLE tcga_family_history (
     INDEX (relative_with_cancer_history)
 );
 
-CREATE TABLE tcga_workflow (
-    id                              INTEGER     AUTO_INCREMENT,
-    workflow_id      VARCHAR(55),
-    project_id                      VARCHAR(55),
-    submitter_id                    VARCHAR(55),
-    sample_id                       VARCHAR(55),
-    workflow_link                   VARCHAR(255),
-    workflow_type                   VARCHAR(55),
-    workflow_end_datetime           VARCHAR(55),
-    workflow_start_datetime         VARCHAR(55),
-    workflow_version                VARCHAR(55),
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
-    UNIQUE (workflow_id),
-    UNIQUE (project_id, submitter_id),
-    INDEX (workflow_type),
-    INDEX (workflow_end_datetime),
-    INDEX (workflow_start_datetime)
-);
-
 CREATE TABLE tcga_file_expression (
     id                              INTEGER     AUTO_INCREMENT,
     file_id                         VARCHAR(55),
     project_id                      VARCHAR(55),
     submitter_id                    VARCHAR(55),
-    workflow_id                     VARCHAR(55),
+    case_id                         VARCHAR(55),
     data_category                   VARCHAR(55),
     data_format                     VARCHAR(55),
     data_type                       VARCHAR(55),
     experimental_strategy           VARCHAR(55),
-    file_name                       VARCHAR(55),
+    file_name                       VARCHAR(255),
     file_size                       INTEGER,
     md5sum                          VARCHAR(55),
     state_comment                   VARCHAR(55),
+    comments                        VARCHAR(55),
 
     PRIMARY KEY (id),
     FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
-    FOREIGN KEY (workflow_id) REFERENCES tcga_workflow(workflow_id),
+    FOREIGN KEY (case_id) REFERENCES tcga_case(case_id),
     UNIQUE (file_id),
     UNIQUE (project_id, submitter_id),
     UNIQUE (file_name),
