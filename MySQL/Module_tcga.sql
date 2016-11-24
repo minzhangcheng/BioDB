@@ -214,7 +214,7 @@ CREATE TABLE tcga_exposure (
     cigarettes_per_day          FLOAT,
     height                      FLOAT,
     weight                      FLOAT,
-                    FLOAT,
+    years_smoked                FLOAT,
 
     PRIMARY KEY (id),
     FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
@@ -302,7 +302,8 @@ CREATE TABLE tcga_file_expression (
     INDEX (data_format),
     INDEX (data_type),
     INDEX (experimental_strategy),
-    INDEX (state_comment)
+    INDEX (state_comment),
+    INDEX (comments)
 );
 
 CREATE TABLE tcga_expression (
