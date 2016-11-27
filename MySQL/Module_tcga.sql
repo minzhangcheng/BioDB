@@ -235,6 +235,7 @@ CREATE TABLE tcga_treatment (
     treatment_id                VARCHAR(55),
     project_id                  VARCHAR(55),
     submitter_id                VARCHAR(55),
+    diagnosis_id				VARCHAR(55),
     case_id                     VARCHAR(55),
     days_to_treatment           INTEGER,
     therapeutic_agents          VARCHAR(55),
@@ -243,6 +244,7 @@ CREATE TABLE tcga_treatment (
 
     PRIMARY KEY (id),
     FOREIGN KEY (project_id) REFERENCES tcga_project(project_id),
+    FOREIGN KEY (diagnosis_id) REFERENCES tcga_diagnosis(diagnosis_id),
     FOREIGN KEY (case_id) REFERENCES tcga_case(case_id),
     UNIQUE (treatment_id),
     UNIQUE (project_id, submitter_id),
